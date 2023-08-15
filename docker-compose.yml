@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: clj_db
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: rinha
+      POSTGRES_PASSWORD: rinha
+      POSTGRES_DB: pessoa

@@ -3,6 +3,13 @@
             [java-time.api :as jt]
             java-time.repl))
 
+(declare create-pessoa-table)
+(declare drop-pessoa-table!)
+(declare get-pessoa)
+(declare list-pessoas)
+(declare count-pessoas)
+(declare insert-pessoa)
+(declare search-pessoa)
 (hugsql/def-db-fns "pessoa.sql")
 
 (def config
@@ -46,11 +53,8 @@
                :stack (into-array ["Go" "Scala"])})
   (insert-pessoa config pessoa)
   (-> (get-pessoa config {:id (java.util.UUID/fromString "38266ed3-8e22-4abd-be1f-e5fa1c0a0fa2")})
-      :stack
-      .getArray
-      seq)
-  (-> (get-pessoa config {:id (java.util.UUID/fromString "38266ed3-8e22-4abd-be1f-e5fa1c0a0fa2")})
       parse-pessoa!)
   (parse-pessoa! {:stack (list "oi" "carlos")})
   (search-pessoa config {:substring "tro"})
-  (list-pessoas config))
+  (list-pessoas config)
+  (count-pessoas config))

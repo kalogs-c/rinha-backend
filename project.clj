@@ -6,7 +6,12 @@
   :dependencies [[org.clojure/clojure "1.11.1"]
                  [com.layerware/hugsql "0.5.3"]
                  [org.postgresql/postgresql "42.3.1"]
-                 [clojure.java-time "1.3.0"]]
+                 [clojure.java-time "1.3.0"]
+                 [metosin/muuntaja "0.6.8"]
+                 [http-kit/http-kit "2.7.0"]
+                 [ring/ring-core "1.10.0"]
+                 [metosin/reitit "0.7.0-alpha5"]
+                 [javax.servlet/servlet-api "2.5"]]
   :main ^:skip-aot rinha-backend.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all

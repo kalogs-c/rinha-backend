@@ -56,5 +56,4 @@
       parse-pessoa!)
   (parse-pessoa! {:stack (list "oi" "carlos")})
   (search-pessoa config {:substring "tro"})
-  (list-pessoas config)
-  (count-pessoas config))
+  (list-pessoas config))

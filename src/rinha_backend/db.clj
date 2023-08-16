@@ -31,40 +31,54 @@
   (jt/local-date "yyyy-MM-dd" string-date))
 
 (defn parse-pessoa! [pessoa]
-  (-> pessoa
-      (assoc :stack (-> pessoa
-                        :stack
-                        parse-pg-array))
-      (assoc :id (-> pessoa
-                     :id
-                     uuid-to-string))
-      (assoc :nascimento (-> pessoa
-                             :nascimento
-                             jt/local-date))))
+  (if-not (nil? (:stack pessoa))
+    (-> pessoa
+        (assoc :stack (-> pessoa
+                          :stack
+                          parse-pg-array))
+        (assoc :id (-> pessoa
+                       :id
+                       uuid-to-string))
+        (assoc :nascimento (-> pessoa
+                               :nascimento
+                               jt/local-date)))
+    (-> pessoa
+        (assoc :id (-> pessoa
+                       :id
+                       uuid-to-string))
+        (assoc :nascimento (-> pessoa
+                               :nascimento
+                               jt/local-date)))))
 
 (defn format-pessoa-req [pessoa]
-  (-> pessoa
-      (assoc :nascimento (-> pessoa
-                             :nascimento
-                             convert-string-to-date))
-      (assoc :stack (-> pessoa
-                        :stack
-                        into-array))))
+  (if-not (nil? (:stack pessoa))
+    (-> pessoa
+        (assoc :nascimento (-> pessoa
+                               :nascimento
+                               convert-string-to-date))
+        (assoc :stack (-> pessoa
+                          :stack
+                          into-array)))
+    (-> pessoa
+        (assoc :nascimento (-> pessoa
+                               :nascimento
+                               convert-string-to-date)))))
 
 (comment
   (create-pessoa-table config)
   (convert-string-to-date "2023-08-15")
   (drop-pessoa-table! config)
+  (nil? nil)
   ;; :apelido, :nome, :nascimento, :stack
-  (def pessoa {:apelido "oyutro"
+  (def pessoa {:apelido "oyu2tr123o"
                :nome "Putro"
                :nascimento (convert-string-to-date "2023-08-15") ;; Data no formato AAAA-MM-DD
-               :stack (into-array ["Go" "Scala"])})
+               :stack nil})
   (-> (insert-pessoa config pessoa)
       first
       :id
       uuid-to-string)
-  (-> (get-pessoa config {:id (java.util.UUID/fromString "38266ed3-8e22-4abd-be1f-e5fa1c0a0fa2")})
+  (-> (get-pessoa config {:id (java.util.UUID/fromString "71887f0e-edaa-4e19-997d-df0017c8c877")})
       parse-pessoa!)
   (parse-pessoa! {:stack (list "oi" "carlos")})
   (search-pessoa config {:substring "tro"})

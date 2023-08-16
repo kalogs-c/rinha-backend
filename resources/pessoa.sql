@@ -24,15 +24,15 @@ WHERE id = :id
 -- :doc Retorna todas as pessoas
 SELECT * FROM pessoa
 
--- :name count-pessoas
+-- :name count-pessoas :1
 -- :doc Retorna a contagem total de registros na tabela pessoa.
 SELECT count(*) FROM pessoa;
 
--- :name insert-pessoa
+-- :name insert-pessoa :1
 -- :doc Insere um novo registro na tabela pessoa.
 INSERT INTO pessoa (apelido, nome, nascimento, stack)
 VALUES (:apelido, :nome, :nascimento, :stack)
-RETURNING *;
+RETURNING id;
 
 -- :name search-pessoa :? :*
 -- :doc Busca registros na tabela pessoa onde algum dos campos contém a substring especificada.

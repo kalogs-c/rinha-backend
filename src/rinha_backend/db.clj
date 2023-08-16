@@ -42,6 +42,15 @@
                              :nascimento
                              jt/local-date))))
 
+(defn format-pessoa-req [pessoa]
+  (-> pessoa
+      (assoc :nascimento (-> pessoa
+                             :nascimento
+                             convert-string-to-date))
+      (assoc :stack (-> pessoa
+                        :stack
+                        into-array))))
+
 (comment
   (create-pessoa-table config)
   (convert-string-to-date "2023-08-15")
@@ -51,9 +60,13 @@
                :nome "Putro"
                :nascimento (convert-string-to-date "2023-08-15") ;; Data no formato AAAA-MM-DD
                :stack (into-array ["Go" "Scala"])})
-  (insert-pessoa config pessoa)
+  (-> (insert-pessoa config pessoa)
+      first
+      :id
+      uuid-to-string)
   (-> (get-pessoa config {:id (java.util.UUID/fromString "38266ed3-8e22-4abd-be1f-e5fa1c0a0fa2")})
       parse-pessoa!)
   (parse-pessoa! {:stack (list "oi" "carlos")})
   (search-pessoa config {:substring "tro"})
-  (list-pessoas config))
+  (list-pessoas config)
+  (count-pessoas config))

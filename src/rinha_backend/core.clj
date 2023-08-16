@@ -4,6 +4,7 @@
             [org.httpkit.server :refer [run-server]]
             [muuntaja.core :as m]
             [reitit.ring.middleware.muuntaja :as muuntaja]
+            [reitit.ring.middleware.parameters :refer [parameters-middleware]]
             [rinha-backend.routes :refer [count-routes pessoa-routes]]))
 
 (defonce server (atom nil))
@@ -12,10 +13,11 @@
   (ring/ring-handler
    (ring/router
     ["/"
-     ["pessoas" pessoa-routes]
-     ["contagem-pessoas" count-routes]]
+     pessoa-routes
+     count-routes]
     {:data {:muuntaja m/instance
-            :middleware [muuntaja/format-middleware]}})))
+            :middleware [muuntaja/format-middleware
+                         parameters-middleware]}})))
 
 (defn stop-server []
   (when-not (nil? @server)
@@ -28,5 +30,6 @@
 
 (comment
   (-main)
+
   (stop-server)
   )

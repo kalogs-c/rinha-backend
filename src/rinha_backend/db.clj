@@ -19,8 +19,8 @@
    :user "rinha"
    :password "rinha"})
 
-(defn parse-pg-array [obj]
-  (-> obj
+(defn parse-pg-array [pg-array]
+  (-> pg-array
       .getArray
       seq))
 

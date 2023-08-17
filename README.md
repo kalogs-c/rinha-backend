@@ -1,44 +1,9 @@
-# rinha-backend
+# Rinha backend com Clojure
 
-FIXME: description
+Essa é, em questão de performance, a PIOR API que eu já vi. Maaaas a ideia era aprender a sintaxe da linguagem clojure, então por ser a minha primeira aplicação completa com a linguagem ta legal.
 
-## Installation
+Tem alguns problemas que não consegui resolver, como por exemplo, até o servidor da boot demora muuuuito, sei que o boot do clojure é demorado por conta de subir a JVM e tals e demora ainda mais com o leiningen.
 
-Download from http://example.com/FIXME.
+Como banco utilizei o postgres.
 
-## Usage
-
-FIXME: explanation
-
-    $ java -jar rinha-backend-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2023 FIXME
-
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
-
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+Enfim, essa provavelmente vai ficar em ultimo no teste kkkkkkkk mas foi legal os perrengues com uma linguagem funcional que eu tinha quase zero contato.

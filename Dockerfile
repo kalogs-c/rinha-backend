@@ -1,4 +1,4 @@
-FROM    clojure:lein
+FROM    clojure:lein AS build
 
 WORKDIR /app
 
@@ -8,8 +8,14 @@ RUN     lein deps
 
 COPY    . /app
 
-RUN     mv "$(lein uberjar | sed -n 's/^Created \(.*standalone\.jar\)/\1/p')" app-standalone.jar
+RUN lein uberjar
+
+FROM openjdk:21-slim
+
+WORKDIR /app
+
+COPY --from=build /app/target/uberjar/*-standalone.jar ./app.jar
 
 EXPOSE  80
 
-CMD java -jar app-standalone.jar
+ENTRYPOINT [ "java", "-jar", "app.jar" ]

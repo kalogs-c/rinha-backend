@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   api1: # API - Instância 01
-    # image: api
+    image: carlinhoscamilo/rinha-backend
     build: .
     hostname: api1
     depends_on:
@@ -15,8 +15,7 @@ services:
           memory: '0.5GB'
 
   api2: # API - Instância 01
-    # image: api
-    build: .
+    image: carlinhoscamilo/rinha-backend
     hostname: api2
     depends_on:
       - db

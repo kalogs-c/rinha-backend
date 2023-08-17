@@ -15,7 +15,7 @@
 (def config
   {:classname "org.postgres.Driver"
    :subprotocol "postgresql"
-   :subname "//db:5432/pessoa"
+   :subname "//db:5432/rinha"
    :user "rinha"
    :password "rinha"})
 

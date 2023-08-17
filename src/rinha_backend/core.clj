@@ -26,12 +26,5 @@
     (reset! server nil)))
 
 (defn -main []
-  (println "Running server on port 8080")
-  (db/create-pessoa-table db/config)
-  (reset! server (run-server app {:port 8080})))
-
-(comment
-  (-main)
-
-  (stop-server)
-  )
+  (println "Running server on port 80") 
+  (reset! server (run-server app {:port 80})))

@@ -31,5 +31,8 @@
   [req]
   (let [q (get-in req [:query-params "t"])
         results (db/search-pessoa db/config {:substring (str q)})]
-    {:status 200
-     :body (map db/parse-pessoa! results)}))
+    (if (or (nil? q) (= q ""))
+      {:status 400
+       :body "Precisa do parametro de busca 't'"}
+      {:status 200
+       :body (map db/parse-pessoa! results)})))

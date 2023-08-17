@@ -15,7 +15,7 @@
 (def config
   {:classname "org.postgres.Driver"
    :subprotocol "postgresql"
-   :subname "//localhost:5432/pessoa"
+   :subname "//db:5432/pessoa"
    :user "rinha"
    :password "rinha"})
 
@@ -63,24 +63,3 @@
         (assoc :nascimento (-> pessoa
                                :nascimento
                                convert-string-to-date)))))
-
-(comment
-  (create-pessoa-table config)
-  (convert-string-to-date "2023-08-15")
-  (drop-pessoa-table! config)
-  (nil? nil)
-  ;; :apelido, :nome, :nascimento, :stack
-  (def pessoa {:apelido "oyu2tr123o"
-               :nome "Putro"
-               :nascimento (convert-string-to-date "2023-08-15") ;; Data no formato AAAA-MM-DD
-               :stack nil})
-  (-> (insert-pessoa config pessoa)
-      first
-      :id
-      uuid-to-string)
-  (-> (get-pessoa config {:id (java.util.UUID/fromString "71887f0e-edaa-4e19-997d-df0017c8c877")})
-      parse-pessoa!)
-  (parse-pessoa! {:stack (list "oi" "carlos")})
-  (search-pessoa config {:substring "tro"})
-  (list-pessoas config)
-  (count-pessoas config))

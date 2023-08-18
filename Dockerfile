@@ -1,16 +1,16 @@
-FROM    clojure:lein AS build
+FROM clojure:lein AS build
 
 WORKDIR /app
 
-COPY    project.clj /app
+COPY project.clj /app
 
-RUN     lein deps
+RUN lein deps
 
-COPY    . /app
+COPY . /app
 
 RUN lein uberjar
 
-FROM openjdk:21-slim
+FROM openjdk:21
 
 WORKDIR /app
 
